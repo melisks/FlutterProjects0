@@ -8,8 +8,19 @@ class AddHttp extends StatefulWidget {
 }
 
 class _AddHttpState extends State<AddHttp> {
+  String? formDataName;
+  String? formDataLink;
+
   void addpin() {
     widget.switchscreen();
+    submitForm();
+  }
+
+  void submitForm() {
+    // Process the form data here
+    print('$formDataName');
+    print('$formDataLink');
+    // Perform additional actions with the form data
   }
 
   @override
@@ -25,8 +36,13 @@ class _AddHttpState extends State<AddHttp> {
           mainAxisSize: MainAxisSize.min,
           children: [
             const Text('add new switch'),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              onChanged: (value) {
+                setState(() {
+                  formDataName = value;
+                });
+              },
+              decoration: const InputDecoration(
                 hintText: 'Name of the Switch',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -39,8 +55,13 @@ class _AddHttpState extends State<AddHttp> {
             const SizedBox(
               height: 20,
             ),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              onChanged: (value) {
+                setState(() {
+                  formDataLink = value;
+                });
+              },
+              decoration: const InputDecoration(
                 hintText: 'Enter Link to the pin number eg:<ip:port>/26/',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(12)),
