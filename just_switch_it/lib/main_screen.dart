@@ -21,6 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   void switchScreen() {
     setState(() {
       currentscreen = const SwitchScreen();
+      add = true;
     });
   }
 

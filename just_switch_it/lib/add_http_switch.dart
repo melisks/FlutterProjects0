@@ -9,9 +9,7 @@ class AddHttp extends StatefulWidget {
 
 class _AddHttpState extends State<AddHttp> {
   void addpin() {
-    setState(() {
-      widget.switchscreen;
-    });
+    widget.switchscreen();
   }
 
   @override
