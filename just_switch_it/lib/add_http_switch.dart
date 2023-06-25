@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddHttp extends StatefulWidget {
   const AddHttp(this.switchscreen, {super.key});
@@ -10,17 +12,20 @@ class AddHttp extends StatefulWidget {
 class _AddHttpState extends State<AddHttp> {
   String? formDataName;
   String? formDataLink;
-
+  int counter = 0;
   void addpin() {
-    widget.switchscreen();
-    submitForm();
+    if (formDataName != null && formDataLink != null) {
+      submitForm();
+      widget.switchscreen();
+      counter++;
+    }
   }
 
-  void submitForm() {
-    // Process the form data here
-    print('$formDataName');
-    print('$formDataLink');
-    // Perform additional actions with the form data
+  Future<void> submitForm() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('counter', counter);
+    await prefs.setString('name$counter', formDataName!);
+    await prefs.setString('link$counter', formDataLink!);
   }
 
   @override
@@ -33,9 +38,17 @@ class _AddHttpState extends State<AddHttp> {
       ),
       child: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
           children: [
-            const Text('add new switch'),
+            const Text(
+              'Add New Switch',
+              style: TextStyle(fontSize: 34),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
             TextField(
               onChanged: (value) {
                 setState(() {
@@ -74,9 +87,21 @@ class _AddHttpState extends State<AddHttp> {
             const SizedBox(
               height: 30,
             ),
-            ElevatedButton(
-              onPressed: addpin,
-              child: const Text('Add Pin'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                  onPressed: addpin,
+                  child: const Text('Add Pin'),
+                ),
+                ElevatedButton(
+                  onPressed: widget.switchscreen,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                  ),
+                  child: const Text('Cancel'),
+                ),
+              ],
             ),
           ],
         ),
