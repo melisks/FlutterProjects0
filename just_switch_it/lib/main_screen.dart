@@ -11,7 +11,18 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   bool? add = true;
-  Widget currentscreen = const AddHttp();
+  Widget? currentscreen;
+  @override
+  void initState() {
+    currentscreen = const SwitchScreen();
+    super.initState();
+  }
+
+  void switchScreen() {
+    setState(() {
+      currentscreen = const SwitchScreen();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
               onPressed: () {
                 if (add == true) {
                   setState(() {
-                    currentscreen = SwitchScreen();
+                    currentscreen = AddHttp(switchScreen);
                   });
                   add = false;
                 }

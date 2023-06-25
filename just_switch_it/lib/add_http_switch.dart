@@ -1,28 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:just_switch_it/main_screen.dart';
-import 'package:just_switch_it/switch_screen.dart';
 
 class AddHttp extends StatefulWidget {
-  const AddHttp({super.key});
-
+  const AddHttp(this.switchscreen, {super.key});
+  final void Function() switchscreen;
   @override
   State<AddHttp> createState() => _AddHttpState();
 }
 
 class _AddHttpState extends State<AddHttp> {
-  Widget mainscreen = const MainScreen(addscreen);
-  void addscreen() {
-    if (add == true) {
-      setState(() {
-        currentscreen = const AddHttp();
-      });
-      add = false;
-    } else if (add == false) {
-      setState(() {
-        currentscreen = const SwitchScreen();
-      });
-      add = true;
-    }
+  void addpin() {
+    setState(() {
+      widget.switchscreen;
+    });
   }
 
   @override
@@ -67,7 +56,7 @@ class _AddHttpState extends State<AddHttp> {
               height: 30,
             ),
             ElevatedButton(
-              onPressed: addscreen,
+              onPressed: addpin,
               child: const Text('Add Pin'),
             ),
           ],
