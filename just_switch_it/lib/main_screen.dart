@@ -61,6 +61,7 @@ class _MainScreenState extends State<MainScreen> {
           ],
         ),
         body: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10),
           child: currentscreen,
         ),
       ),
