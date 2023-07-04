@@ -31,7 +31,7 @@ class _MainScreenState extends State<MainScreen> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text(
-            'Just Switch It',
+            'VOLT LINK',
           ),
           actions: [
             IconButton(

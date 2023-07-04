@@ -30,6 +30,7 @@ class _SwitchScreenState extends State<SwitchScreen> {
             switchDataList
                 .add(SwitchData(name: [switchName], link: [switchLink]));
             print('this is saved list data $switchDataList');
+            print(counter);
           });
         }
       }

@@ -12,18 +12,17 @@ class AddHttp extends StatefulWidget {
 class _AddHttpState extends State<AddHttp> {
   String? formDataName;
   String? formDataLink;
-  int counter = 0;
+
   void addpin() {
     if (formDataName != null && formDataLink != null) {
       submitForm();
       widget.switchscreen();
-      counter++;
     }
   }
 
   Future<void> submitForm() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('counter', counter);
+    final int counter = (prefs.getInt('counter') ?? 0) + 1;
     await prefs.setString('name$counter', formDataName!);
     await prefs.setString('link$counter', formDataLink!);
   }
