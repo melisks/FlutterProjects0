@@ -23,6 +23,7 @@ class _SwitchScreenState extends State<SwitchScreen> {
     final int? counter = prefs.getInt('counter');
     if (counter != null) {
       for (var i = 1; i <= counter; i++) {
+        print(i);
         final String? switchName = prefs.getString('name$i');
         final String? switchLink = prefs.getString('link$i');
         if (switchName != null && switchLink != null) {
@@ -35,7 +36,6 @@ class _SwitchScreenState extends State<SwitchScreen> {
     }
   }
 
-  @override
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
