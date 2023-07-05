@@ -65,6 +65,7 @@ class _AddHttpState extends State<AddHttp> {
                   formDataName = value;
                 });
               },
+              maxLength: 7,
               decoration: const InputDecoration(
                 hintText: 'Name of the Switch',
                 border: OutlineInputBorder(
