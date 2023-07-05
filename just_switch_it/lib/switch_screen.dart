@@ -23,7 +23,6 @@ class _SwitchScreenState extends State<SwitchScreen> {
     final int? counter = prefs.getInt('counter');
     if (counter != null) {
       for (var i = 1; i <= counter; i++) {
-        print(i);
         final String? switchName = prefs.getString('name$i');
         final String? switchLink = prefs.getString('link$i');
         if (switchName != null && switchLink != null) {
@@ -43,18 +42,20 @@ class _SwitchScreenState extends State<SwitchScreen> {
       itemBuilder: (context, index) {
         var switchData = switchDataList[index];
 
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: List.generate(switchData.name.length, (nameIndex) {
-            final switchName = switchData.name[nameIndex];
-            final switchLink = switchData.link[nameIndex];
+        return SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: List.generate(switchData.name.length, (nameIndex) {
+              final switchName = switchData.name[nameIndex];
+              final switchLink = switchData.link[nameIndex];
 
-            return Switches(
-              name: switchName,
-              link: switchLink,
-            );
-          }),
+              return Switches(
+                name: switchName,
+                link: switchLink,
+              );
+            }),
+          ),
         );
       },
     );

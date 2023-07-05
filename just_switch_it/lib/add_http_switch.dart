@@ -16,9 +16,6 @@ class _AddHttpState extends State<AddHttp> {
   void addpin() {
     if (formDataName != null && formDataLink != null) {
       submitForm();
-      setState(() {
-        widget.switchscreen();
-      });
     }
   }
 
@@ -30,6 +27,15 @@ class _AddHttpState extends State<AddHttp> {
     await prefs.setInt('counter', counter);
     await prefs.setString('name$counter', formDataName!);
     await prefs.setString('link$counter', formDataLink!);
+    setState(() {
+      widget.switchscreen();
+    });
+  }
+
+  void cancel() {
+    setState(() {
+      widget.switchscreen();
+    });
   }
 
   @override
@@ -99,7 +105,7 @@ class _AddHttpState extends State<AddHttp> {
                   child: const Text('Add Pin'),
                 ),
                 ElevatedButton(
-                  onPressed: widget.switchscreen,
+                  onPressed: cancel,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
                   ),

@@ -11,13 +11,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   bool? add = true;
-  Widget? currentscreen;
-  @override
-  void initState() {
-    currentscreen = const SwitchScreen();
-    super.initState();
-  }
-
+  Widget? currentscreen = const SwitchScreen();
   void switchScreen() {
     setState(() {
       currentscreen = const SwitchScreen();
@@ -30,6 +24,7 @@ class _MainScreenState extends State<MainScreen> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.black87,
           title: const Text(
             'VOLT LINK',
           ),
