@@ -60,7 +60,7 @@ class Switches extends StatelessWidget {
       height: 143,
       margin: const EdgeInsets.symmetric(vertical: 3),
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 180, 89, 255),
+        color: const Color.fromARGB(255, 180, 89, 255),
         borderRadius: BorderRadius.circular(25),
         border: Border.all(
           color: const Color.fromARGB(255, 48, 28, 62),
