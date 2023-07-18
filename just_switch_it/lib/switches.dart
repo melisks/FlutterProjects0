@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Switches extends StatelessWidget {
-  const Switches({
+class Switches extends StatefulWidget {
+  const Switches(
+      // this.reloadScreen,
+      {
     super.key,
     required this.name,
     required this.link,
@@ -11,11 +13,15 @@ class Switches extends StatelessWidget {
 
   final String name;
   final String link;
+  // final void Function() reloadScreen;
 
-  get reloadSwitchScreen => null;
+  @override
+  State<Switches> createState() => _SwitchesState();
+}
 
+class _SwitchesState extends State<Switches> {
   Future<void> requon() async {
-    var urlon = Uri.parse("$link/ON");
+    var urlon = Uri.parse("${widget.link}/on");
     var response = await http.get(urlon);
 
     if (response.statusCode == 200) {
@@ -28,7 +34,7 @@ class Switches extends StatelessWidget {
   }
 
   Future<void> requoff() async {
-    var urloff = Uri.parse("$link/OFF");
+    var urloff = Uri.parse("${widget.link}/off");
     var response = await http.get(urloff);
 
     if (response.statusCode == 200) {
@@ -45,11 +51,13 @@ class Switches extends StatelessWidget {
     int? counter = prefs.getInt('counter');
     for (var i = 1; i <= counter!; i++) {
       final String? switchName = prefs.getString('name$i');
-      if (switchName == name) {
+      final String? switchLink = prefs.getString('link$i');
+      if (switchName == widget.name && switchLink == widget.link) {
         await prefs.remove('name$i');
         await prefs.remove('link$i');
         counter = (counter) - 1;
         await prefs.setInt('counter', counter);
+        // widget.reloadScreen();
       }
     }
   }
@@ -75,7 +83,7 @@ class Switches extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                name,
+                widget.name,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
@@ -87,7 +95,11 @@ class Switches extends StatelessWidget {
                 width: 10,
               ),
               IconButton(
-                onPressed: deleteData,
+                onPressed: () {
+                  setState(() {
+                    deleteData();
+                  });
+                },
                 icon: const Icon(
                   Icons.delete_forever,
                   size: 35,

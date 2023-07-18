@@ -53,6 +53,7 @@ class _SwitchScreenState extends State<SwitchScreen> {
               return Switches(
                 name: switchName,
                 link: switchLink,
+                // loadSwitchData,
               );
             }),
           ),
