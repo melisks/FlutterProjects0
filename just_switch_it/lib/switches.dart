@@ -20,16 +20,19 @@ class Switches extends StatefulWidget {
 }
 
 class _SwitchesState extends State<Switches> {
+  String resp = "off";
+
   Future<void> requon() async {
     var urlon = Uri.parse("${widget.link}/on");
     var response = await http.get(urlon);
 
     if (response.statusCode == 200) {
       // Request successful
-      print('Response body: ${response.body}');
+      resp = response.body;
+      // print('Response body: ${response.body}');
     } else {
       // Request failed
-      print('Request failed with status: ${response.statusCode}');
+      // print('Request failed with status: ${response.statusCode}');
     }
   }
 
@@ -39,10 +42,11 @@ class _SwitchesState extends State<Switches> {
 
     if (response.statusCode == 200) {
       // Request successful
-      print('Response body: ${response.body}');
+      resp = response.body;
+      // print('Response body: ${response.body}');
     } else {
       // Request failed
-      print('Request failed with status: ${response.statusCode}');
+      // print('Request failed with status: ${response.statusCode}');
     }
   }
 
@@ -80,7 +84,7 @@ class _SwitchesState extends State<Switches> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text(
                 widget.name,
@@ -124,6 +128,15 @@ class _SwitchesState extends State<Switches> {
                   foregroundColor: Colors.white,
                 ),
                 child: const Text('ON'),
+              ),
+              SizedBox(
+                child: Text(
+                  resp,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                  ),
+                ),
               ),
               ElevatedButton(
                 onPressed: requoff,
