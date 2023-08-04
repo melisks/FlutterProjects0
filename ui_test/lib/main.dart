@@ -32,12 +32,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int controlnum = 0;
   @override
   Widget build(BuildContext context) {
     return PageView(
+      onPageChanged: (index) {
+        setState(() {
+          controlnum = index;
+        });
+      },
       children: [
         const Neumorphics(),
-        const LottieAmimations(),
+        LottieAmimations(
+          index: controlnum,
+        ),
         Container(
           color: const Color.fromARGB(255, 255, 24, 201),
         ),
