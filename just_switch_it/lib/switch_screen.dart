@@ -46,16 +46,19 @@ class _SwitchScreenState extends State<SwitchScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
-            children: List.generate(switchData.name.length, (nameIndex) {
-              final switchName = switchData.name[nameIndex];
-              final switchLink = switchData.link[nameIndex];
+            children: List.generate(
+              switchData.name.length,
+              (nameIndex) {
+                final switchName = switchData.name[nameIndex];
+                final switchLink = switchData.link[nameIndex];
 
-              return Switches(
-                name: switchName,
-                link: switchLink,
-                // loadSwitchData,
-              );
-            }),
+                return Switches(
+                  name: switchName,
+                  link: switchLink,
+                  // loadSwitchData,
+                );
+              },
+            ),
           ),
         );
       },
