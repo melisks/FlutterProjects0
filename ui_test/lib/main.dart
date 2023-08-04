@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ui_test/ui%20elements/lottie_animation.dart';
-import 'package:ui_test/ui%20elements/neumorphic_design.dart';
+import 'package:ui_test/ui_elements/lottie_animation.dart';
+import 'package:ui_test/ui_elements/neumorphic_design.dart';
 
 void main() {
   runApp(const MyApp());
