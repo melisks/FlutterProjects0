@@ -6,7 +6,7 @@ class Neumorphics extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey.shade300,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -16,20 +16,26 @@ class Neumorphics extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  height: 100,
-                  width: 100,
+                  height: 160,
+                  width: 160,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Colors.grey.shade300,
                     border: Border.all(
-                      color: Colors.white,
+                      color: Colors.grey.shade300,
                     ),
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 15.0,
                         spreadRadius: 1.0,
-                        offset: const Offset(2, 2),
-                        color: Colors.grey.shade400,
+                        offset: const Offset(6, 6),
+                        color: Colors.grey.shade500,
+                      ),
+                      const BoxShadow(
+                        blurRadius: 15.0,
+                        spreadRadius: 1.0,
+                        offset: Offset(-6, -6),
+                        color: Colors.white,
                       ),
                     ],
                   ),
