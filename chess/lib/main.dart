@@ -2,7 +2,7 @@ import 'package:chess/game_board.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: Home(),
   ));
 }
@@ -12,6 +12,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GameBoard();
+    return const GameBoard();
   }
 }
