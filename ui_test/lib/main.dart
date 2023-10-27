@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui_test/ui_elements/confetti.dart';
 import 'package:ui_test/ui_elements/lottie_animation.dart';
 import 'package:ui_test/ui_elements/neumorphic_design.dart';
 
@@ -46,9 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
         LottieAmimations(
           index: controlnum,
         ),
-        Container(
-          color: const Color.fromARGB(255, 255, 24, 201),
-        ),
+        const Confetti(),
       ],
     );
   }
