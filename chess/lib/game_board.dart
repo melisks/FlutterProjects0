@@ -16,6 +16,7 @@ class _GameBoardState extends State<GameBoard> {
   Piece? selected;
   int selectedrow = -1;
   int selectedcol = -1;
+  List<List<int>> validmove = [];
 
   @override
   void initState() {
@@ -86,8 +87,79 @@ class _GameBoardState extends State<GameBoard> {
         selected = board[row][col];
         selectedrow = row;
         selectedcol = col;
+        validmove = allpossiblemoves(selectedrow, selectedcol, selected);
       });
     }
+  }
+
+  List<List<int>> allpossiblemoves(int row, int col, Piece? selected) {
+    List<List<int>> moves = [];
+    int dir = selected!.iswhite ? -1 : 1;
+
+    switch (selected.type) {
+      case PieceType.pawn:
+        // moves ones
+        if (isinBoard(row + dir, col) && board[row + dir][col] == null) {
+          moves.add([row + dir, col]);
+        }
+        // moves twice from initial pos
+        if (row == 1 && !selected.iswhite || row == 6 && selected.iswhite) {
+          if (isinBoard(row + 2 * dir, col) &&
+              board[row + 2 * dir][col] == null &&
+              board[row + dir][col] == null) {
+            moves.add([row + 2 * dir, col]);
+          }
+        }
+        // captures cross
+        if (isinBoard(row + dir, col - 1) &&
+            board[row + dir][col - 1] != null &&
+            board[row + dir][col - 1]!.iswhite) {
+          moves.add([row + dir, col - 1]);
+        }
+        if (isinBoard(row + dir, col + 1) &&
+            board[row + dir][col + 1] != null &&
+            board[row + dir][col + 1]!.iswhite) {
+          moves.add([row + dir, col + 1]);
+        }
+        // if (isinBoard(row + dir, col - 1) &&
+        //     board[row + dir][col - 1] != null &&
+        //     board[row + dir][col - 1]!.iswhite) {
+        //   moves.add([row + dir, col - 1]);
+        // }
+        // if (isinBoard(row + dir, col + 1) &&
+        //     board[row + dir][col + 1] != null &&
+        //     board[row + dir][col + 1]!.iswhite) {
+        //   moves.add([row + dir, col + 1]);
+        // }
+
+        // empass special rule
+
+        break;
+      case PieceType.rook:
+        // moves vertical and horizontal
+        var directions = [
+          [-1, 0],
+          [1, 0],
+          [0, -1],
+          [0, 1]
+        ];
+        for (var dirs in directions) {}
+        break;
+      case PieceType.knight:
+        //if it moves 2 square verical the moves one horizontal both sides and vice-versa
+        break;
+      case PieceType.bishop:
+        // moves in cross
+        break;
+      case PieceType.king:
+        //moves in all dir. but only one at a time
+        // special move castle
+        break;
+      case PieceType.queen:
+        //moves all dir.
+        break;
+    }
+    return moves;
   }
 
   @override
@@ -103,9 +175,16 @@ class _GameBoardState extends State<GameBoard> {
           int row = index ~/ 8;
           int col = index % 8;
           bool isSelected = selectedrow == row && selectedcol == col;
+          bool isvalid = false;
+          for (var pos in validmove) {
+            if (pos[0] == row && pos[1] == col) {
+              isvalid = true;
+            }
+          }
           return Center(
             child: Square(
               onTap: () => pieceInteraction(row, col),
+              isValidmove: isvalid,
               iswhite: iswhite(index),
               piece: board[row][col],
               isSelected: isSelected,
